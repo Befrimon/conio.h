@@ -33,18 +33,6 @@ The library provides various functions, including:
 - `putchar`
 - `cputs`
 - `clreol`
-- `insline` (not implemented)
-- `delline` (not implemented)
-- `cgets`  (not implemented)
-- `getpass` (not implemented)
-- `gettext` (not implemented)
-- `_cprintf`
-- `_cscanf`
-- `_cputs`
-- `_getche`
-- `_kbhit`
-- `_putch`
-- `_ungetch`
 
 Some commonly used functions:
 - `kbhit` - Checks if a key was pressed.
@@ -62,27 +50,30 @@ Follow these steps to install the `conio.h` library for Linux:
 
 ### Step 1:
 1. First, open your terminal as root.
-   ```bash
-   sudo apt-get update
-   sudo apt-get upgrade
-   sudo apt-get install git
-   git clone https://github.com/zoelabbb/conio.h.git
-   cd conio.h
-   ```
-   > ![Copy & Paste](https://github.com/zoelabbb/conio.h/blob/master/src/img/Copy%20%26%20Paste.png)
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install git
+git clone https://github.com/Befrimon/conio.h.git
+cd conio.h
+```
 
 ### Step 2:
-   ```bash
-   sudo make install
-   ```
-   Restart or close your IDE and open it again.
+Build conio.h library
+```bash
+sudo make install
+```
 
-Now you can use the library `#include <conio.h>`.
+### Step 3:
+Build and run your .cpp file
+```bash
+g++ example.cpp -L/usr/lib/ -conio.h -o example.o
+./example.o
+```
 
-## Support Me
 
-If you find this library helpful, you can support the developer by:
-- [PayPal ☕](#)
-- [Buy Coffee ☕](#)
+## Support Authots
+Original: (zoelabbb)[https://github.com/zoelabbb/conio.h]
+Edit by me (Befrimon)
 
 Feel free to use and contribute to this library!

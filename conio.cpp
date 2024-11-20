@@ -6,11 +6,15 @@
 #include <fcntl.h>
 #include <termios.h>
 
-conio::Console::Console(): bg_color(BLACK), fg_color(WHITE) {}
+conio::Console::Console(): bg_color(BLACK), fg_color(WHITE) 
+{
+	
+}
 conio::Console::~Console()
 {
-    printf("\033[m");
+	std::cout << "\033[m" << "\e[?25h";
 }
+
 
 void conio::Console::clearLine()
 {
@@ -31,38 +35,33 @@ void conio::Console::setCursorPosition(int x, int y)
 }
 void conio::Console::clearScreen()
 {
-    std::cout << "\033[" << bg_color << "m\033[2J\033[1;1f";
+    std::cout << "\033[0m\033[2J\033[1;1f";
 }
 
 void conio::Console::setBackgroundColor(short color)
 {
     if (color < 0 || color >= 10) return;
-    bg_color = color;
+	if (color == 10) bg_color = -40;
+	else bg_color = color;
     std::cout << "\033[0;" << 30 + fg_color << ";" << 40 + bg_color << "m";
 }
 
 void conio::Console::setTextColor(short color)
 {
     if (color < 0 || color >= 10) return;
-    fg_color = color;
+	if (color == 10) fg_color = -30;
+	else fg_color = color;
     std::cout << "\033[0;" << 30 + fg_color << ";" << 40 + bg_color << "m";
 }
 
 int conio::Console::setEchoMode(bool enable)
 {
-    struct termios oldt, newt;
-    int ch;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~ICANON;
-    if (enable)
-        newt.c_lflag |= ECHO;
-    else
-        newt.c_lflag &= ~ECHO;
+    termios newt;
+	tcgetattr(STDIN_FILENO, &newt);
+    if (enable) newt.c_lflag |= (ICANON | ECHO);
+    else newt.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    ch = getchar();
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    return ch;
+    return getchar();
 }
 
 int conio::Console::ungetch(int ch)
@@ -76,6 +75,10 @@ int conio::Console::getch()
 int conio::Console::getche()
 {
     return setEchoMode(true);
+}
+int conio::Console::getarrow()
+{
+	return getch() + getch();
 }
 
 int conio::Console::wherexy(int &x, int &y)
@@ -128,24 +131,36 @@ int conio::Console::kbhit()
     return 0;
 }
 
-int putch(const char c)
+int conio::Console::putch(const char c)
 {
     std::cout << c;
     return (int)c;
 }
-int cputs(const char* str)
+int conio::Console::cputs(const char* str)
 {
     std::cout << str;
     return 0;
 }
 
-char* getpass(const char* prompt)
+char* conio::Console::getpass(const char* prompt)
 {
     // implementada en unistd.h
     return nullptr;
 }
-int gettext(int l, int t, int r, int b, void* destination)
+int conio::Console::gettext(int l, int t, int r, int b, void* destination)
 {
     // Provide a meaningful implementation or remove the parameters if not needed.
     return 0;
 }
+
+void conio::Console::hideCursor()
+{
+	std::cout << "\e[?25l";
+}
+void conio::Console::enableCursor()
+{
+	std::cout << "\e[?25h";
+}
+
+conio::Console* conio::console = new conio::Console();
+

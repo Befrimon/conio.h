@@ -17,22 +17,22 @@ If you encounter an error like `conio.h: fatal error`, this library might be wha
 
 The library provides various functions, including:
     
-- `cprintf`
-- `cscanf`
-- `gotoxy`
-- `clrscr`
-- `textcolor`
-- `textbackground`
-- `wherex`
-- `wherey`
-- `getch`
-- `getche`
-- `ungetch`
-- `kbhit`
-- `putch`
-- `putchar`
-- `cputs`
-- `clreol`
+- `clearLine()`
+- `insertLine()`
+- `deleteLine()`
+- `setCursorPosition(int x, int y)`
+- `clearScreen()`
+- `setBackgroundColor()`
+- `setTextColor()`
+- `setEchoMode(bool enable)`
+- `getch()`
+- `getche()`
+- `wherexy(int& x, int& y)`
+- `kbhit()`
+- `putch()`
+- `cputs()`
+- `hideCursor()`
+- `enableCursor()`
 
 Some commonly used functions:
 - `kbhit` - Checks if a key was pressed.

@@ -62,14 +62,16 @@ List funtions
 #ifndef __CONIO4LINUX_H
 #define __CONIO4LINUX_H
 
-#define BLACK 0
-#define RED 1
-#define GREEN 2
-#define YELLOW 3
-#define BLUE 4
-#define PURPLE 5
-#define CYAN 6
-#define WHITE 9
+/* COLORS */
+#define BLACK 	0
+#define RED 	1
+#define GREEN 	2
+#define YELLOW 	3
+#define BLUE 	4
+#define PURPLE 	5
+#define CYAN 	6
+#define WHITE 	9
+#define RESET 	10
 
 namespace conio
 {
@@ -99,6 +101,7 @@ namespace conio
         int ungetch(int ch);
         int getch();
         int getche();
+		int getarrow();
 
         int wherexy(int &x, int &y);
         int wherex();
@@ -111,7 +114,12 @@ namespace conio
 
         char* getpass(const char* prompt);
         int gettext(int l, int t, int r, int b, void* destination);
+
+		void hideCursor();
+		void enableCursor();
     };
+
+	extern Console* console;
 }
 
 #endif

@@ -36,27 +36,6 @@ GitHub      : https://github.com/zoelabbb/conio.h.git
  * @version 1.1.1
  */
 
-
-/*
-List funtions
-=============
-    cprintf
-    cscanf
-    gotoxy
-    clrscr
-    textcolor
-    textbackground
-    wherex
-    wherey
-    getch
-    getche
-    ungetch
-    kbhit
-    putch
-    putchar
-    cputs
-    clreol
-*/
 #pragma once
 
 #ifndef __CONIO4LINUX_H
@@ -70,56 +49,53 @@ List funtions
 #define BLUE 	4
 #define PURPLE 	5
 #define CYAN 	6
+#define GRAY    7
 #define WHITE 	9
 #define RESET 	10
 
 namespace conio
 {
-    class Console
+    class console
     {
       private:
-        int bg_color;
-        int fg_color;
+        static int bg_color;
+        static int fg_color;
 
       public:
-        Console();
-        ~Console();
+        static void clearLine();
+        static void insertLine();
+        static void deleteLine();
 
+        static void setCursorPosition(int x, int y);
+        static void clearScreen();
 
-        void clearLine();
-        void insertLine();
-        void deleteLine();
+        static void setBackgroundColor(short color);
+        static void setTextColor(short color);
 
-        void setCursorPosition(int x, int y);
-        void clearScreen();
+        static int setEchoMode(bool enable);
 
-        void setBackgroundColor(short color);
-        void setTextColor(short color);
+        static int ungetch(int ch);
+        static int getch();
+        static int getche();
+		static int getarrow();
 
-        int setEchoMode(bool enable);
+        static void wherexy(int &x, int &y);
+        static int wherex();
+        static int wherey();
 
-        int ungetch(int ch);
-        int getch();
-        int getche();
-		int getarrow();
+        static int kbhit();
 
-        int wherexy(int &x, int &y);
-        int wherex();
-        int wherey();
+        static int putch(char c);
+        static int cputs(const char* str);
 
-        int kbhit();
+        static char* getpass(const char* prompt);
+        static int gettext(int l, int t, int r, int b, void* destination);
 
-        int putch(const char c);
-        int cputs(const char* str);
+		static void hideCursor();
+		static void enableCursor();
 
-        char* getpass(const char* prompt);
-        int gettext(int l, int t, int r, int b, void* destination);
-
-		void hideCursor();
-		void enableCursor();
+		static void getTerminalSize(int &x, int&y);
     };
-
-	extern Console* console;
 }
 
 #endif

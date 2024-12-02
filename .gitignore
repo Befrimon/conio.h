@@ -1,4 +1,5 @@
 .DS_Store
 README_.md
 _conio.h
-build/*
+build/
+.idea/

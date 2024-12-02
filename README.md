@@ -27,12 +27,14 @@ The library provides various functions, including:
 - `setEchoMode(bool enable)`
 - `getch()`
 - `getche()`
+- `getarrow()`
 - `wherexy(int& x, int& y)`
 - `kbhit()`
 - `putch()`
 - `cputs()`
 - `hideCursor()`
 - `enableCursor()`
+- `getTerminalSize(int &x, int &y)`
 
 Some commonly used functions:
 - `kbhit` - Checks if a key was pressed.
